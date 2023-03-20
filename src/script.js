@@ -1,14 +1,10 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import * as dat from 'lil-gui'
 
-import rawVertexShader from './shaders/raw/vertex.glsl'
-import rawFragmentShader from './shaders/raw/fragment.glsl'
+// import rawVertexShader from './shaders/raw/vertex.glsl'
+// import rawFragmentShader from './shaders/raw/fragment.glsl'
 import cookedVertexShader from './shaders/cooked/vertex.glsl'
 import cookedFragmentShader from './shaders/cooked/fragment.glsl'
-
-// Debug
-const gui = new dat.GUI()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -16,15 +12,10 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-/**
- * Textures
- */
+// Textures
 const textureLoader = new THREE.TextureLoader()
 const flagTexture = textureLoader.load('/textures/swissFlag.png')
 
-/**
- * Test mesh
- */
 // Geometry
 const geometry = new THREE.PlaneGeometry(1, 1, 32, 32)
 
@@ -36,9 +27,11 @@ for (let i = 0; i < count; i++) {
     randoms[i] = Math.random()
 
 }
+
 geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1))
 
 // // Material
+// // Material for the Raw Version
 // const material = new THREE.RawShaderMaterial({
 //     vertexShader: rawVertexShader,
 //     fragmentShader: rawFragmentShader,
@@ -76,10 +69,7 @@ const mesh = new THREE.Mesh(geometry, material)
 mesh.scale.y = 1
 scene.add(mesh)
 
-
-/**
- * Sizes
- */
+// Sizes
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
@@ -100,9 +90,7 @@ window.addEventListener('resize', () =>
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
-/**
- * Camera
- */
+// Camera
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.set(0.25, - 0.25, 1)
@@ -112,18 +100,15 @@ scene.add(camera)
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 
-/**
- * Renderer
- */
+// Renderer
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-/**
- * Animate
- */
+
+// Animate
 const clock = new THREE.Clock()
 
 const tick = () =>
