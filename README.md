@@ -1,4 +1,4 @@
-# Custom Shader Flag
+# Custom Shader Flag 🇨🇭
 
 Custom GLSL WebGL shaders to create an animated flag
 
